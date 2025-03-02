@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: url-shortener
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/urlshortenerdb
+    username: root
+    password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+jwt:
+  secret: 23aa53354d6baa43691aee1b8e877aa9f61860a68700d985cc667a96edcb82b4a4bc9e9720468ece22a614d9f34b33e3637a1d2597ba56b08472cc51c60a7dbe
+  expiration: 172800000
