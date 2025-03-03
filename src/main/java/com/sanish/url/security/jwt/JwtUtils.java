@@ -1,4 +1,4 @@
-package com.sanish.url.security;
+package com.sanish.url.security.jwt;
 
 import com.sanish.url.services.UserDetailsImpl;
 import io.jsonwebtoken.JwtException;
