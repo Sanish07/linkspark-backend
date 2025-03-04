@@ -14,3 +14,12 @@ spring:
 jwt:
   secret: 23aa53354d6baa43691aee1b8e877aa9f61860a68700d985cc667a96edcb82b4a4bc9e9720468ece22a614d9f34b33e3637a1d2597ba56b08472cc51c60a7dbe
   expiration: 172800000
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+    com:
+      sanish:
+        url: DEBUG
