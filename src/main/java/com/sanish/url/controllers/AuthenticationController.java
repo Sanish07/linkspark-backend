@@ -1,7 +1,9 @@
 package com.sanish.url.controllers;
 
+import com.sanish.url.dtos.LoginReqDto;
 import com.sanish.url.dtos.RegisterReqDto;
 import com.sanish.url.entities.User;
+import com.sanish.url.security.jwt.JwtAuthenticationResponse;
 import com.sanish.url.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthenticationController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public AuthenticationController(UserService userService) {
@@ -22,7 +24,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/public/signup")
-    public ResponseEntity<?> registerUser(@RequestBody RegisterReqDto registerReqDto){
+    public ResponseEntity<String> registerUser(@RequestBody RegisterReqDto registerReqDto){
 
         //Setting all user details
         User user = new User();
@@ -37,9 +39,9 @@ public class AuthenticationController {
     }
 
     @PostMapping("/public/login")
-    public ResponseEntity<?> loginUser(@RequestBody RegisterReqDto registerReqDto){
-
-
-        return ResponseEntity.ok("User signed up successfully!");
+    public ResponseEntity<JwtAuthenticationResponse> loginUser(@RequestBody LoginReqDto loginReqDto){
+        return ResponseEntity.ok(userService.loginUser(loginReqDto));
     }
+
+
 }
