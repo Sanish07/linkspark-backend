@@ -7,12 +7,10 @@ import com.sanish.url.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Map;
 
 @RequestMapping("/api/urls")
@@ -37,5 +35,14 @@ public class UrlManagementController {
         UrlManagementDto urlManagementDto =  urlManagementService.createShortUrl(originalUrl, user);
 
         return ResponseEntity.ok(urlManagementDto);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/active-urls")
+    public ResponseEntity<List<UrlManagementDto>> getUsersAllActiveUrls(Principal principal){
+        User user = userService.findUserByUsername(principal.getName());
+        List<UrlManagementDto> allUrls = urlManagementService.getAllUserUrls(user);
+
+        return ResponseEntity.ok(allUrls);
     }
 }
