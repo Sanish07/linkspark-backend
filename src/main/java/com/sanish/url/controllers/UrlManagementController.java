@@ -1,5 +1,6 @@
 package com.sanish.url.controllers;
 
+import com.sanish.url.dtos.ClicksInfoDto;
 import com.sanish.url.dtos.UrlManagementDto;
 import com.sanish.url.entities.User;
 import com.sanish.url.services.UrlManagementService;
@@ -10,6 +11,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -45,4 +49,35 @@ public class UrlManagementController {
 
         return ResponseEntity.ok(allUrls);
     }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/stats/{shortUrl}")
+    public ResponseEntity<List<ClicksInfoDto>> getShortUrlStats(@PathVariable String shortUrl,
+                                                                @RequestParam("fromDate") String fromDate,
+                                                                @RequestParam("toDate") String toDate){
+
+        LocalDateTime from = urlManagementService.parseDateTime(fromDate);
+        LocalDateTime to = urlManagementService.parseDateTime(toDate);
+        List<ClicksInfoDto> statsResponse = urlManagementService.getClicksInfoByDate(shortUrl, from, to);
+
+        return ResponseEntity.ok(statsResponse);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/totalClicks")
+    public ResponseEntity<Map<LocalDate, Long>> getTotalClicksByDate(Principal principal,
+                                                                @RequestParam("fromDate") String fromDate,
+                                                                @RequestParam("toDate") String toDate){
+
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
+        LocalDate from = LocalDate.parse(fromDate, formatter);
+        LocalDate to = LocalDate.parse(toDate, formatter);
+
+        User user = userService.findUserByUsername(principal.getName());
+
+        Map<LocalDate, Long> clicksResponse = urlManagementService.getUsersTotalClicksByDate(user, from, to);
+
+        return ResponseEntity.ok(clicksResponse);
+    }
+
 }
