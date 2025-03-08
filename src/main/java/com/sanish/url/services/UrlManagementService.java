@@ -125,4 +125,22 @@ public class UrlManagementService {
                 .collect(Collectors.groupingBy(click -> click.getClickStamp().toLocalDate(),
                         Collectors.counting()));
     }
+
+    public UrlMapping getCorrespondingOriginalUrl(String shortUrl) {
+        UrlMapping fetchedShortUrl = urlMappingRepository.findByShortUrl(shortUrl);
+
+        //Record the click/visit of short url and update its click stats
+        if(fetchedShortUrl != null){
+            fetchedShortUrl.setClickCount(fetchedShortUrl.getClickCount() + 1); //Update click count
+            urlMappingRepository.save(fetchedShortUrl);
+
+            //Update ClicksInfo table data
+            ClicksInfo clicksInfo = new ClicksInfo();
+            clicksInfo.setClickStamp(LocalDateTime.now());
+            clicksInfo.setUrlMapping(fetchedShortUrl);
+            clicksInfoRepository.save(clicksInfo);
+        }
+
+        return fetchedShortUrl;
+    }
 }

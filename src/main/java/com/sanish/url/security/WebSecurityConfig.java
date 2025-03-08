@@ -56,9 +56,9 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/urls/**").authenticated()
-                        .requestMatchers("/{shortUrl}").permitAll()
+                        .requestMatchers("/api/auth/**").permitAll() //Routes for Registering a new user/login
+                        .requestMatchers("/api/urls/**").authenticated() //Routes for creating short url and viewing created urls stats
+                        .requestMatchers("/{shortUrl}").permitAll() //Redirection route for a short url to original url
                         .anyRequest().authenticated()
                 );
 

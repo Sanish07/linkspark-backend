@@ -15,14 +15,4 @@ public class UrlShortenerApplication {
 		SpringApplication.run(UrlShortenerApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner commandLineRunner(UserRepository userRepository){
-		return args -> {
-			User user =  userRepository.findByUsername("radbrad")
-					.orElseThrow(() -> new UsernameNotFoundException("Not found"));
-
-			System.out.println(user);
-		};
-	}
-
 }
