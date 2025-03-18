@@ -13,18 +13,12 @@ public class WebConfig implements WebMvcConfigurer {
     @Value("${client.url}")
     private String clientURL;
 
-    @Bean
-    public WebMvcConfigurer corsConfiguration(){
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOrigins(clientURL)
-                        .allowedMethods("GET","POST","PUT","DELETE","OPTIONS")
-                        .allowedHeaders("*")
-                        .allowCredentials(true)
-                        .maxAge(3600);
-            }
-        };
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins(clientURL)
+                .allowedMethods("GET","POST","PUT","DELETE","OPTIONS")
+                .allowedHeaders("*")
+                .allowCredentials(true);
     }
 }
