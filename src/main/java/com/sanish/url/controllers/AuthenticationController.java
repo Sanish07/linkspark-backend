@@ -6,11 +6,9 @@ import com.sanish.url.entities.User;
 import com.sanish.url.security.jwt.JwtAuthenticationResponse;
 import com.sanish.url.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/api/auth")
 @RestController
@@ -43,5 +41,9 @@ public class AuthenticationController {
         return ResponseEntity.ok(userService.loginUser(loginReqDto));
     }
 
-
+    @GetMapping("/total-users")
+    public ResponseEntity<String> getGlobalUserCount(){
+        String totalUsers = userService.getActiveGlobalUsersCount();
+        return new ResponseEntity<>(totalUsers, HttpStatus.OK);
+    }
 }

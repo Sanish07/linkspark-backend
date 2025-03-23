@@ -21,5 +21,5 @@ public class User {
 
     private String password;
 
-    private String role = "ROLE_USER"; //Default role assigned to a client inititally will be USER
+    private String role = "ROLE_USER"; //Default role assigned to a client initially will be USER
 }

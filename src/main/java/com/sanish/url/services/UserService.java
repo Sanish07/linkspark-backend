@@ -67,4 +67,8 @@ public class UserService {
                 () -> new UsernameNotFoundException("User not found with username : "+name)
         );
     }
+
+    public String getActiveGlobalUsersCount() {
+        return Long.toString(userRepository.count());
+    }
 }

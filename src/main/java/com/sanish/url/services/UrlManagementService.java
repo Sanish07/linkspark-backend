@@ -7,6 +7,7 @@ import com.sanish.url.entities.UrlMapping;
 import com.sanish.url.entities.User;
 import com.sanish.url.repositories.ClicksInfoRepository;
 import com.sanish.url.repositories.UrlMappingRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -142,5 +143,16 @@ public class UrlManagementService {
         }
 
         return fetchedShortUrl;
+    }
+
+    @Transactional
+    public String deleteShortUrlAndItsData(String shortUrl){
+        UrlMapping fetchedEntry = urlMappingRepository.findByShortUrl(shortUrl); //Search Short URL in UrlMapping table
+        if(fetchedEntry != null) {
+            clicksInfoRepository.deleteAllByUrlMappingInBatch(fetchedEntry); //Delete all info of corr. url in cIR
+            urlMappingRepository.deleteById(fetchedEntry.getId()); //Delete the url data
+        }
+
+        return "Short Url deleted successfully!";
     }
 }

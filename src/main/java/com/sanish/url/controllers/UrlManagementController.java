@@ -6,6 +6,7 @@ import com.sanish.url.entities.User;
 import com.sanish.url.services.UrlManagementService;
 import com.sanish.url.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -78,6 +79,13 @@ public class UrlManagementController {
         Map<LocalDate, Long> clicksResponse = urlManagementService.getUsersTotalClicksByDate(user, from, to);
 
         return ResponseEntity.ok(clicksResponse);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @DeleteMapping("/delete/{shortUrl}")
+    public ResponseEntity<String> deleteShortUrlAndItsData(@PathVariable String shortUrl){
+        urlManagementService.deleteShortUrlAndItsData(shortUrl);
+        return new ResponseEntity<>("Deleted", HttpStatus.OK);
     }
 
 }
