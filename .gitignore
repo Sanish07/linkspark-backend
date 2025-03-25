@@ -4,6 +4,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### Production Environment Variables file ###
+.env.prod
+
 ### STS ###
 .apt_generated
 .classpath

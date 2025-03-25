@@ -1,18 +1,18 @@
 spring:
   application:
-    name: url-shortener
+    name: url-shortener-backend
 
   datasource:
-    url: jdbc:mysql://localhost:3306/urlshortenerdb
-    username: root
-    password: root
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
 
   jpa:
     hibernate:
       ddl-auto: update
 
 jwt:
-  secret: 23aa53354d6baa43691aee1b8e877aa9f61860a68700d985cc667a96edcb82b4a4bc9e9720468ece22a614d9f34b33e3637a1d2597ba56b08472cc51c60a7dbe
+  secret: ${JWT_SECRET}
   expiration: 172800000
 
 logging:
@@ -25,4 +25,4 @@ logging:
         url: DEBUG
 
 client:
-  url: http://localhost:5173
+  url: ${CLIENT_URL}
