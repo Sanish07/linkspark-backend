@@ -1,0 +1,14 @@
+// Access/set environment variables for powershell
+$env:SPRING_APPLICATION_NAME="value"
+//From .env
+$env:DATABASE_URL="jdbc:mysql://localhost:3306/urlshortenerdb"
+$env:DATABASE_USERNAME="root"
+$env:DATABASE_PASSWORD="root"
+$env:JWT_SECRET="23aa53354d6baa43691aee1b8e877aa9f61860a68700d985cc667a96edcb82b4a4bc9e9720468ece22a614d9f34b33e3637a1d2597ba56b08472cc51c60a7dbe"
+$env:CLIENT_URL="http://localhost:5173"
+//Packaging command for powershell
+./mvnw package
+
+// Access/set environment variables for cmd
+set SPRING_APPLICATION_NAME=value
+mvnw package
