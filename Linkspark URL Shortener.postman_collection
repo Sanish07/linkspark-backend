@@ -1,0 +1,316 @@
+{
+	"info": {
+		"_postman_id": "0276886c-5731-4ae3-aa44-9915a217de31",
+		"name": "URL Shortener",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16903779"
+	},
+	"item": [
+		{
+			"name": "Sign Up New User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"poppy10\",\r\n    \"email\" : \"poppy@excane.org.uk\",\r\n    \"password\" : \"poppy10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/public/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"public",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"poppy10\",\r\n    \"password\" : \"poppy10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/public/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"public",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Count Total Users (Get Active Global Users)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"radbrad\",\r\n    \"email\" : \"rad@gmail.com\",\r\n    \"role\" : [\"ROLE_USER\"],\r\n    \"password\" : \"rad\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/total-users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"total-users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Shorten URLs",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYWRicmFkIiwicm9sZXMiOiJST0xFX1VTRVIiLCJpYXQiOjE3NDIyMTc0NjMsImV4cCI6MTc0MjM5MDI2M30.AmwNiE9Wo-zJXpT98PSAK8qbKvIT1vlaCxbtnWRNUtpUhVzIpUNQKI-5-DA81zcm8oRCdS_frMiWlpX1Ls7ukA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYWRicmFkIiwicm9sZXMiOiJST0xFX1VTRVIiLCJpYXQiOjE3NDEyNzI1MzcsImV4cCI6MTc0MTQ0NTMzN30.3i5PK33pyiaaTJAi3gHSgg95MLDwoem6BIgzlZ1hFkZjkjecOobonFBXdEiq2wthyUN5VJ5MPSzuwmqXsNJhpw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"originalUrl\" : \"https://netflix.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/urls/shorten",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"urls",
+						"shorten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All User's Urls",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYWRicmFkIiwicm9sZXMiOiJST0xFX1VTRVIiLCJpYXQiOjE3NDIzMDg2ODgsImV4cCI6MTc0MjQ4MTQ4OH0.P-soQ-FTGi6jCbQqwf3wOMRZERACagkVxSe9dYzQPuWB-0szWBEW5_u7_jPY2WbbLoSn-pTew-AzWCUSM1nvMA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/urls/active-urls",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"urls",
+						"active-urls"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get an URL Stats",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwb3BweTEwIiwicm9sZXMiOiJST0xFX1VTRVIiLCJpYXQiOjE3NDI3MjM4ODksImV4cCI6MTc0Mjg5NjY4OX0.iNdl-tOOC9ymR1oETzDduMyeesQsw1_ILHVkelWocKxlZ292MtEIPd6KUh5azHksbmeRHbwUsKRdmf4AY3Q90g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/urls/stats/N3RId3L?fromDate=2025-03-09T00:00:00&toDate=2025-03-23T12:00:00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"urls",
+						"stats",
+						"N3RId3L"
+					],
+					"query": [
+						{
+							"key": "fromDate",
+							"value": "2025-03-09T00:00:00"
+						},
+						{
+							"key": "toDate",
+							"value": "2025-03-23T12:00:00"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an Short URL entry",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwb3BweTEwIiwicm9sZXMiOiJST0xFX1VTRVIiLCJpYXQiOjE3NDI3MjM4ODksImV4cCI6MTc0Mjg5NjY4OX0.iNdl-tOOC9ymR1oETzDduMyeesQsw1_ILHVkelWocKxlZ292MtEIPd6KUh5azHksbmeRHbwUsKRdmf4AY3Q90g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/urls/delete/ll5ZMMo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"urls",
+						"delete",
+						"ll5ZMMo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get an URL Clicks count by date",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYWRicmFkIiwicm9sZXMiOiJST0xFX1VTRVIiLCJpYXQiOjE3NDIyMTc0NjMsImV4cCI6MTc0MjM5MDI2M30.AmwNiE9Wo-zJXpT98PSAK8qbKvIT1vlaCxbtnWRNUtpUhVzIpUNQKI-5-DA81zcm8oRCdS_frMiWlpX1Ls7ukA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/urls/totalClicks?fromDate=2025-03-10&toDate=2025-03-19",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"urls",
+						"totalClicks"
+					],
+					"query": [
+						{
+							"key": "fromDate",
+							"value": "2025-03-10"
+						},
+						{
+							"key": "toDate",
+							"value": "2025-03-19"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Redirect short url",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/DezIx40",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"DezIx40"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
